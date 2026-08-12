@@ -1,0 +1,6 @@
+{
+  "name": "DinkSync",
+  "description": "DinkSync - Open Play Court & Rotation Manager for Pickleball Organizers.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

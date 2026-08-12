@@ -1,0 +1,72 @@
+{
+  "entities": {
+    "sessions": {
+      "title": "Sessions",
+      "description": "Open play session configurations and states",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "passcode": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" },
+        "status": { "type": "string" },
+        "settings": { "type": "object" },
+        "courtCount": { "type": "number" },
+        "courtNames": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": ["title", "status"]
+    },
+    "sessions/{sessionId}/players": {
+      "title": "Players",
+      "description": "Registered players in a session",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "skillLevel": { "type": "string" },
+        "status": { "type": "string" },
+        "wins": { "type": "number" },
+        "losses": { "type": "number" },
+        "gamesPlayed": { "type": "number" },
+        "pointsFor": { "type": "number" },
+        "pointsAgainst": { "type": "number" },
+        "pointDiff": { "type": "number" },
+        "streak": { "type": "number" },
+        "joinedAt": { "type": "string", "format": "date-time" },
+        "avatarColor": { "type": "string" }
+      },
+      "required": ["name", "status"]
+    },
+    "sessions/{sessionId}/courts": {
+      "title": "Courts",
+      "description": "Active courts in a session",
+      "type": "object",
+      "properties": {
+        "number": { "type": "number" },
+        "name": { "type": "string" },
+        "status": { "type": "string" },
+        "currentMatchId": { "type": "string" },
+        "team1": { "type": "array", "items": { "type": "string" } },
+        "team2": { "type": "array", "items": { "type": "string" } },
+        "team1Score": { "type": "number" },
+        "team2Score": { "type": "number" }
+      },
+      "required": ["name", "status"]
+    },
+    "sessions/{sessionId}/matches": {
+      "title": "Matches",
+      "description": "Recorded matches for a session",
+      "type": "object",
+      "properties": {
+        "courtId": { "type": "string" },
+        "courtName": { "type": "string" },
+        "team1": { "type": "array", "items": { "type": "string" } },
+        "team2": { "type": "array", "items": { "type": "string" } },
+        "team1Score": { "type": "number" },
+        "team2Score": { "type": "number" },
+        "winnerTeam": { "type": "number" },
+        "status": { "type": "string" }
+      },
+      "required": ["courtId", "status"]
+    }
+  }
+}
