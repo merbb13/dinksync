@@ -20,7 +20,10 @@ const app = !getApps().length
   ? initializeApp(firebaseConfig)
   : getApp();
 
-export const db = getFirestore(app);
+export const db = getFirestore(
+  app,
+  'ai-studio-pickleballopenpl-81b7fa58-4c87-46df-8976-3e33e131d178'
+);
 
 export const auth = getAuth(app);
 
