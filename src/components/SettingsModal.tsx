@@ -1,6 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { X, Save, RefreshCw, Trash2, Plus, Sliders, Database, Layers } from 'lucide-react';
-import { Session, SessionSettings, Player } from '../types';
+import React, { useState, useEffect } from "react";
+import {
+  X,
+  Save,
+  RefreshCw,
+  Trash2,
+  Plus,
+  Sliders,
+  Database,
+  Layers,
+} from "lucide-react";
+import { Session, SessionSettings, Player } from "../types";
 
 interface SettingsModalProps {
   isOpen: boolean;
@@ -21,13 +30,19 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   onUpdateSettings,
   onUpdateCourts,
   onSeedDemo,
-  onResetStats
+  onResetStats,
 }) => {
   const [targetScore, setTargetScore] = useState(11);
   const [winByTwo, setWinByTwo] = useState(true);
-  const [gameType, setGameType] = useState<'doubles' | 'singles'>('doubles');
-  const [rotationMode, setRotationMode] = useState<'random' | 'balanced' | 'queue' | 'king'>('random');
-  const [courtNames, setCourtNames] = useState<string[]>(['Court 1', 'Court 2', 'Court 3']);
+  const [gameType, setGameType] = useState<"doubles" | "singles">("doubles");
+  const [rotationMode, setRotationMode] = useState<
+    "random" | "balanced" | "queue" | "king"
+  >("random");
+  const [courtNames, setCourtNames] = useState<string[]>([
+    "Court 1",
+    "Court 2",
+    "Court 3",
+  ]);
   const [isSaving, setIsSaving] = useState(false);
   const [isSeeding, setIsSeeding] = useState(false);
 
@@ -35,9 +50,13 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
     if (session) {
       setTargetScore(session.settings?.targetScore || 11);
       setWinByTwo(session.settings?.winByTwo ?? true);
-      setGameType(session.settings?.gameType || 'doubles');
-      setRotationMode(session.settings?.rotationMode || 'random');
-      setCourtNames(session.courtNames?.length ? session.courtNames : ['Court 1', 'Court 2', 'Court 3']);
+      setGameType(session.settings?.gameType || "doubles");
+      setRotationMode(session.settings?.rotationMode || "random");
+      setCourtNames(
+        session.courtNames?.length
+          ? session.courtNames
+          : ["Court 1", "Court 2", "Court 3"],
+      );
     }
   }, [session, isOpen]);
 
@@ -66,7 +85,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
         targetScore,
         winByTwo,
         gameType,
-        rotationMode
+        rotationMode,
       });
       await onUpdateCourts(courtNames);
       onClose();
@@ -91,7 +110,6 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-fade-in">
       <div className="bg-slate-900 border border-slate-800 rounded-2xl max-w-lg w-full p-6 shadow-2xl text-slate-100 relative max-h-[90vh] overflow-y-auto">
-        
         <button
           onClick={onClose}
           className="absolute top-4 right-4 text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800 transition-colors"
@@ -113,7 +131,6 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
         </div>
 
         <div className="space-y-6">
-          
           {/* Section 1: Court Setup */}
           <div className="space-y-3">
             <div className="flex items-center justify-between">
@@ -134,7 +151,9 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
             <div className="space-y-2 max-h-40 overflow-y-auto pr-1">
               {courtNames.map((name, i) => (
                 <div key={i} className="flex items-center space-x-2">
-                  <span className="text-xs text-slate-500 font-mono w-6">#{i + 1}</span>
+                  <span className="text-xs text-slate-500 font-mono w-6">
+                    #{i + 1}
+                  </span>
                   <input
                     type="text"
                     value={name}
@@ -163,7 +182,9 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
 
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs text-slate-400 mb-1 font-medium">Rotation Logic</label>
+                <label className="block text-xs text-slate-400 mb-1 font-medium">
+                  Rotation Logic
+                </label>
                 <select
                   value={rotationMode}
                   onChange={(e) => setRotationMode(e.target.value as any)}
@@ -176,7 +197,9 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
               </div>
 
               <div>
-                <label className="block text-xs text-slate-400 mb-1 font-medium">Target Score</label>
+                <label className="block text-xs text-slate-400 mb-1 font-medium">
+                  Target Score
+                </label>
                 <select
                   value={targetScore}
                   onChange={(e) => setTargetScore(Number(e.target.value))}
@@ -191,7 +214,9 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
 
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs text-slate-400 mb-1 font-medium">Format</label>
+                <label className="block text-xs text-slate-400 mb-1 font-medium">
+                  Format
+                </label>
                 <select
                   value={gameType}
                   onChange={(e) => setGameType(e.target.value as any)}
@@ -210,7 +235,10 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                   onChange={(e) => setWinByTwo(e.target.checked)}
                   className="w-4 h-4 rounded accent-emerald-500 bg-slate-800 border-slate-700"
                 />
-                <label htmlFor="winByTwo" className="text-xs text-slate-300 font-medium cursor-pointer">
+                <label
+                  htmlFor="winByTwo"
+                  className="text-xs text-slate-300 font-medium cursor-pointer"
+                >
                   Win By Two
                 </label>
               </div>
@@ -221,11 +249,11 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
           <div className="space-y-3 pt-2 border-t border-slate-800">
             <label className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center space-x-1.5">
               <Database className="w-4 h-4 text-amber-400" />
-              <span>Demo Data & Session Reset</span>
+              <span>Session Reset</span>
             </label>
 
-            <div className="flex flex-col sm:flex-row gap-2">
-              <button
+            <div className="flex flex-col sm:flex-row gap-1">
+              {/*<button
                 type="button"
                 onClick={handleSeedClick}
                 disabled={isSeeding}
@@ -233,7 +261,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
               >
                 <RefreshCw className={`w-3.5 h-3.5 ${isSeeding ? 'animate-spin' : ''}`} />
                 <span>Seed Sample Players ({players.length})</span>
-              </button>
+              </button>*/}
 
               <button
                 type="button"
@@ -259,9 +287,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
               <span>Save & Apply Settings</span>
             </button>
           </div>
-
         </div>
-
       </div>
     </div>
   );
